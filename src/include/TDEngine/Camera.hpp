@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 //#include <glad/glad.h> // Обязательно
 #include <MathLib/VectorFuncs.hpp>
+#include <GUIlib/Elems/Buttons.hpp>
 
 float rad(float degrees){
     return degrees * 3.14159 / 180;
@@ -30,14 +31,20 @@ class Camera{
           tAspect=0.5,
           sens = 0.2;
     bool lostFocus = false;
+    GUIlib::Button btn;
 
     Camera(vec3 pos_, float speed_=1){
         pos=pos_;
         speed=speed_;
     }
 
-    void update(sf::RenderWindow *window){
-        if(sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)){
+    void setButtonArea(vec2 pos_, vec2 size_){
+        btn.pos = pos_;
+        btn.size = size_;
+    }
+
+    void update(sf::RenderWindow *window, MouseData &mdata){
+        if(btn.isClicked(getMousePos(*window), 0, mdata)){
             lostFocus = false;
             window->setMouseCursorVisible(false);
         }

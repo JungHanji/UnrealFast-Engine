@@ -48,8 +48,8 @@ class OpenGLWindow{
         this->draw = draw;
     }
 
-    void update(){
-        if(cameraEnabled) camera.update(window);
+    void update(MouseData &mdata){
+        if(cameraEnabled) camera.update(window, mdata);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         //cout<<"OpenGLWindow updated!"<<endl;
         
