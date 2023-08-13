@@ -20,6 +20,8 @@ namespace GUIlib{
         vec2 backGroundSize, pos, padding = vec2(0, 0);
         RectangleShape backGround;
 
+        vec2 globalPadding = vec2(0, 0);
+
         bool enabledLines = false;
         int charSize = 20, typeTextPosition = 0;
 

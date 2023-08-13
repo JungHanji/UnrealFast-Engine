@@ -36,15 +36,15 @@ class Camera{
         speed=speed_;
     }
 
-    void update(sf::RenderWindow &window){
+    void update(sf::RenderWindow *window){
         if(sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)){
             lostFocus = false;
-            window.setMouseCursorVisible(false);
+            window->setMouseCursorVisible(false);
         }
 
-        if(window.hasFocus() && !lostFocus){
-            mpos = fromsfveci(sf::Mouse::getPosition(window));
-            mpos -= vec2(window.getSize().x/2, window.getSize().y/2);
+        if(window->hasFocus() && !lostFocus){
+            mpos = fromsfveci(sf::Mouse::getPosition(*window));
+            mpos -= vec2(window->getSize().x/2, window->getSize().y/2);
             rot.x -= mpos.x * sens;
             rot.y -= mpos.y * sens;
             //Что бы нельзя было делать сальто камерой
@@ -55,7 +55,7 @@ class Camera{
             }
 
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)){
-                window.setMouseCursorVisible(true);
+                window->setMouseCursorVisible(true);
                 lostFocus = true;
             }
 
@@ -77,7 +77,7 @@ class Camera{
                 pos-=vec3(0, speed, 0);
             }
             
-            sf::Mouse::setPosition(sf::Vector2i(window.getSize().x/2, window.getSize().y/2), window);
+            sf::Mouse::setPosition(sf::Vector2i(window->getSize().x/2, window->getSize().y/2), *window);
         }
     }
 

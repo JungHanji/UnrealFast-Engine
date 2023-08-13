@@ -40,6 +40,8 @@ namespace GUIlib{
         //CheckBox& getCheckbox(string name){return dCheckboxes[paarIndex(dCheckboxes, getPaarByName(dCheckboxes, name))].value;}
         Container& getContainer(string name){return dContainers[paarIndex(dContainers, getPaarByName(dContainers, name))].value;}
 
+        vec2 globalPadding = vec2(0, 0);
+
         Container(){
             ;
         }
@@ -55,6 +57,10 @@ namespace GUIlib{
             for(auto &slider : dSliders) slider.get().draw(window, mData);
             for(auto &container : dContainers) container.get().update(window, mData, kData, tick);
             //for(auto &checkbox : dCheckboxes) checkbox.get().draw(window, mData);
+        }
+
+        bool operator==(const Container& other){
+            return name == other.name;
         }
     };
 

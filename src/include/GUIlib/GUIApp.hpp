@@ -33,10 +33,16 @@ class GUIApp{
     vector<paar<string, Slider>> dSliders;
     vector<paar<string, InputField>> dInputFields;
 
+    function<void(GUIApp*)> updateFunction;
+
     GUIApp(string name_, vec2 res_, vec3 bgColor_){
         name = name_;
         res = res_;
         bgColor = bgColor_;
+    }
+
+    void setUpdateFunction(function<void(GUIApp*)> updateFunction_){
+        updateFunction = updateFunction_;
     }
 
     void addButton(Button button){
@@ -118,14 +124,23 @@ class GUIApp{
                 }
             }
 
-            window.clear({bgColor.x, bgColor.y, bgColor.z});
+            //window.pushGLStates();
+            //window.clear({bgColor.x, bgColor.y, bgColor.z});
+            //window.popGLStates();
 
+            window.setActive(true);
+            updateFunction(this);
+            window.setActive(false);
+
+            window.pushGLStates();
+            
             for(auto &figure : dFigures) figure.get().draw(window);
             for(auto &image : dImages) image.get().draw(window);
             for(auto &text : dTexts) text.get().draw(window, tick);
             for(auto &inputField : dInputFields) inputField.get().update(window, mData, kData, tick);
             for(auto &button : dButtons) button.get().draw(window, mData, tick);
             for(auto &slider : dSliders) slider.get().draw(window, mData);
+            window.popGLStates();
 
             window.display();
             tick++;

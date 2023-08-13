@@ -74,6 +74,8 @@ namespace GUIlib{
             }
         }
 
+        vec2 globalPadding = vec2(0, 0);
+
         vec2 &returnValue(){
             return value;
         }

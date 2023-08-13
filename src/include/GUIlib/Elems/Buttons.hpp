@@ -21,6 +21,8 @@ namespace GUIlib{
         bool visible = true, switchable = false;
         bool b_clicked = false, b_held = false, b_hovered = false;
 
+        vec2 globalPadding = vec2(0, 0);
+
         using CallbackType = std::function<void(Button*)>;
         CallbackType onClick, onHold, onHover;
 

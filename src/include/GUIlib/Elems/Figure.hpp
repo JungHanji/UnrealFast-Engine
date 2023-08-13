@@ -13,6 +13,8 @@ namespace GUIlib{
         vec2 pos, size, point2;
         vec3 color;
 
+        vec2 globalPadding = vec2(0, 0);
+
         int radius;
 
         Figure(string name, string type, vec2 pos, vec2 size, vec3 color){

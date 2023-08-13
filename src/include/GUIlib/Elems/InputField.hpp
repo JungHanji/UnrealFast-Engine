@@ -14,6 +14,8 @@ namespace GUIlib{
         wstring stext;
         string name;
 
+        vec2 globalPadding = vec2(0, 0);
+
         bool inFocus = false, isMultiLine = false;
         vec2 textSize, padding;
 

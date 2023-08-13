@@ -16,6 +16,8 @@ namespace GUIlib{
         vec2 size, pos;
         vec3 color;
 
+        vec2 globalPadding = vec2(0, 0);
+
         string name;
 
         Image(string name_, string fileName, vec2 pos_, vec2 size_, vec3 color_ = vec3(255,255,255)){

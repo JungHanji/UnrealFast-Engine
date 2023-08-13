@@ -25,6 +25,12 @@ void init(){
 }
 
 void showDemo(){
+    float vert[] = {
+        1, 0, 1,  
+        1, 0, -1,  
+        -1, 0, -1,  
+        -1, 0, 1
+    };
     glEnableClientState(GL_VERTEX_ARRAY);
         glVertexPointer(3, GL_FLOAT, 0, &vert);
         for(int i = -5; i < 5; i++){
@@ -80,7 +86,7 @@ int main(){
 
     
 
-    window.setActive(false);
+    //window.setActive(false);
     Clock clock;
     Event event;
     while(window.isOpen()){
@@ -88,9 +94,9 @@ int main(){
             if (event.type == Event::Closed) window.close();
         }
         elapsedTime = clock.getElapsedTime().asMilliseconds();
-        if(cameraEnabled) camera.update(window);
+        if(cameraEnabled) camera.update(&window);
         
-        window.setActive(true);
+        //window.setActive(true);
 
         
         glClearColor(bgColor.x / 255.f, bgColor.y / 255.f, bgColor.z / 255.f, 1);
@@ -103,7 +109,7 @@ int main(){
             draw();
         glPopMatrix();
 
-        window.setActive(false);
+        //window.setActive(false);
         window.display();
     }
 }
