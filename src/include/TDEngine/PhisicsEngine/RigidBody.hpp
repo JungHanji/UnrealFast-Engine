@@ -19,7 +19,7 @@ struct RigidBody{
     }
 };
 
-struct PhisicsScene{
+struct PhysicsScene{
     dict<string, RigidBody> rbodys;
     float airResistance = 0.7,
           gravity = 0.15,
@@ -46,6 +46,10 @@ struct PhisicsScene{
         }
 
         return {{HitBox(), HitBox()}, false};
+    }
+
+    void addRigidBody(string &name, Object *object, bool stbody = false, bool througness = false){
+        rbodys.set(name, RigidBody(HitBoxFromObject(*object), object, {0, 0, 0}, stbody, througness));
     }
 
     void update(){

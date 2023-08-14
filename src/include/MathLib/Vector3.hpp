@@ -39,4 +39,5 @@ void operator/=(vec3 &a, float b){a.x /= b; a.y /= b; a.z /= b; }
 void operator*=(vec3 &a, float b){a.x *= b; a.y *= b; a.z *= b; }
 
 bool operator==(vec3 a, vec3 b){ return a.x == b.x && a.y == b.y && a.z == b.z; }
+bool operator!=(vec3 a, vec3 b){ return !(a == b);}
 vec3 operator-(vec3 a){ return {-a.x, -a.y, -a.z}; }

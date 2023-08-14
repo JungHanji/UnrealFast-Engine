@@ -4,6 +4,27 @@
 #include <vector>
 #include <fstream>
 
+template<class kc>
+bool in(vector<kc> v, kc i){
+    for(kc k : v){
+        if(k == i){
+            return true;
+        }
+    }
+    return false;
+}
+
+template<class vc>
+int index(vector<vc> vecs, vc key){
+    int ind = 0;
+    for(vc vkey : vecs){
+        if(vkey == key) return ind;
+        ind++;
+    }
+
+    return -1;
+}
+
 template<class kc, class vc>
 class dict{
     public:
@@ -112,27 +133,6 @@ vector<reference_wrapper<vc>> getOnlyVals(vector<paar<kc, vc>> vd){
 template<class k>
 k getLast(vector<k> v){
     return v[v.size()-1];
-}
-
-template<class kc>
-bool in(vector<kc> v, kc i){
-    for(kc k : v){
-        if(k == i){
-            return true;
-        }
-    }
-    return false;
-}
-
-template<class vc>
-int index(vector<vc> vecs, vc key){
-    int ind = 0;
-    for(vc vkey : vecs){
-        if(vkey == key) return ind;
-        ind++;
-    }
-
-    return -1;
 }
 
 template<class cs>

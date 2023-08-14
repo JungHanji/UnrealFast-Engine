@@ -19,15 +19,6 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-Camera camera = Camera({0, 0, 0});
-
-float vert[] = {
-    1, 0, 1,  
-    1, 0, -1,  
-    -1, 0, -1,  
-    -1, 0, 1
-};
-
 class ETexture{
     public:
 
@@ -116,19 +107,11 @@ ETexture loadTextureFromFile(string fileName){
     return {t};
 }
 
-template<class cs>
-void printv(vector<cs> vs){
-    for(cs s: vs){
-        cout<<"'"<<s<<"' ";
-    }
-    cout<<endl;
-}
-
 class Object{
     public:
     GLfloat *vecMesh, *texMesh;
 
-    vec3 pos, rot, scale;
+    vec3 pos, rot, scale, color = -1;
     vector<u_int> vertices, uvCoords, normals;
     mesh smesh;
 
@@ -187,43 +170,20 @@ class Object{
                 vertices.push_back(t.p[i].z);
             }
         }
-
-        cout<<"g";
     }
 
     void draw(){
         glPushMatrix();
+            if(color != vec3(-1)) glColor3f(color.x, color.y, color.z);
             glTranslatef(pos.x, pos.y, pos.z);
             glScalef(scale.x, scale.y, scale.z);
             for(triangle t : smesh.tris){
                 glBegin(GL_TRIANGLES);
+                    if(color == vec3(-1)) glColor3f(t.color.x, t.color.y, t.color.z);
                     for(int i=0; i < 3; i++){
                         glTexCoord2f(t.t[i].x, t.t[i].y);
                         glVertex3f(t.p[i].x, t.p[i].y, t.p[i].z);
                     }
-                glEnd();
-            }
-        glPopMatrix();
-    }
-
-    void drawWithVTextures(vector<ETexture> textures){
-        int tnum = 0;
-        int tr = 2;
-        glPushMatrix();
-            glTranslatef(pos.x, pos.y, pos.z);
-            glScalef(scale.x, scale.y, scale.z);
-            for(triangle t : smesh.tris){
-                if(tr>=2){
-                    textures[tnum].active(true);
-                    tnum++;
-                }
-
-                glBegin(GL_TRIANGLES);
-                    for(int i=0; i < 3; i++){
-                        glTexCoord2f(t.t[i].x, t.t[i].y);
-                        glVertex3f(t.p[i].x, t.p[i].y, t.p[i].z);
-                    }
-                    tr++;
                 glEnd();
             }
         glPopMatrix();

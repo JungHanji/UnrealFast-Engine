@@ -18,9 +18,7 @@ class OpenGLWindow{
     OpenGLWindow(vec2 pos, vec2 size, vec3 bgColor, sf::RenderWindow *w): pos(pos), size(size), bgColor(bgColor) {
         window = w;
         init();
-        cout<<"OpenGLWindow created!"<<endl;
         glClearColor(bgColor.x / 255.f, bgColor.y / 255.f, bgColor.z / 255.f, 1.0f);
-        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glEnable(GL_DEPTH_TEST);
         glDepthMask(GL_TRUE);
@@ -45,7 +43,6 @@ class OpenGLWindow{
     void update(MouseData &mdata){
         if(cameraEnabled) camera.update(window, mdata);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        //cout<<"OpenGLWindow updated!"<<endl;
         
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();

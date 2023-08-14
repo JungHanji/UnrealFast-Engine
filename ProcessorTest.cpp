@@ -1,12 +1,12 @@
 #include <GUIlib/GUIApp.hpp>
 
 #include <cmath>
-#include <TDEngine/OpenGLWindow.hpp>
+#include <TDEngine/Processor.hpp>
 #include <glad/glad.h>
 #include <GLUT/glut.h>
 
 GUIApp app;
-OpenGLWindow glwindow;
+Processor proc;
 
 float r,g,b;
 
@@ -16,46 +16,26 @@ void updateColor(Slider* slider, vec2 &val){
     if(slider->name == "b") b = slider->getRightValue();
 }
 
-float vert[] = {
-    1, 0, 1,  
-    1, 0, -1,  
-    -1, 0, -1,  
-    -1, 0, 1
-};
-
-void draw(OpenGLWindow *window){
-    glEnableClientState(GL_VERTEX_ARRAY);
-        glVertexPointer(3, GL_FLOAT, 0, &vert);
-        for(int i = -5; i < 5; i++){
-            for(int j = -5; j < 5; j++){
-                glPushMatrix();
-                    if((i+j) % 2 == 0) glColor3f(r, g, b);
-                    else glColor3f(1, 1, 1);
-                    glTranslatef(i*2, 0, j*2);
-                    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-                glPopMatrix();
-            }
-        }
-    glDisableClientState(GL_VERTEX_ARRAY);
-}
-
 void update(GUIApp *app){
-    glwindow.update(app->mData);
+    proc.update(app->mData);
+    cout<<proc.getObject("cube").pos.x<<" "<<proc.getObject("cube").pos.y<<" "<<proc.getObject("cube").pos.z<<endl;
 }
 
 int main(){
     system("cls");
     
     RenderWindow window(VideoMode(1500, 900), "Tau engine");
-    
+    window.setFramerateLimit(60);
+
     app.bgColor = vec3(200, 200, 200);
     app.setUpdateFunction(update);
-    
-    glwindow = OpenGLWindow({400, 300}, {800, 500}, {100, 200, 255}, &window);
-    glwindow.setDraw(draw);
-    glwindow.camera.setButtonArea({400, 50}, {800, 500});
 
-    window.setFramerateLimit(60);
+    proc = Processor({400, 300}, {800, 500}, {100, 200, 255}, &window);
+
+    Object plane = Plane({-50, 0, -50}, {100, 100}, {0, 255, 0}), cube = Cube({0, 10, 0}, {255, 0, 0}, 5);
+    proc.newObject("plane", &plane, true, true, false);
+    proc.newObject("cube", &cube);
+
 
     //UI Box
     app.addFigure(Figure("top", "rectangle", {400, 0}, {800, 100}, {100, 100, 100}));
