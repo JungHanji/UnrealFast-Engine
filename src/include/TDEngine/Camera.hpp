@@ -1,5 +1,5 @@
-#include <SFML/Graphics.hpp>
-//#include <glad/glad.h> // Обязательно
+#pragma once
+
 #include <MathLib/VectorFuncs.hpp>
 #include <GUIlib/Elems/Buttons.hpp>
 

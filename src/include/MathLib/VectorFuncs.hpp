@@ -7,7 +7,7 @@ float dot(vec3 a, vec3 b){ return a.x * b.x + a.y * b.y + a.z * b.z; }
 float len(vec3 v) { return sqrt(v.x * v.x + v.y * v.y + v.z * v.z); }
 float dist(vec3 a, vec3 b){ return sqrtf(pow(b.x - a.x, 2) + pow(b.y - a.y, 2) + pow(b.z - a.z, 2)); }
 
-vec3 abs(vec3 v){ return {abs(v.x), abs(v.y), abs(v.z)};}
+vec3 abs(vec3 v){ return {std::abs(v.x), std::abs(v.y), std::abs(v.z)};}
 vec3 norm(vec3 a){ return len(a) != 0 ? a / len(a): vec3(0, 0, 0); }
 vec3 clamp(float a, float b, vec3 v){ return {clamp(a, b, v.x), clamp(a, b, v.y), clamp(a, b, v.z)}; }
 vec3 cross(vec3 a, vec3 b){ return { a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x }; }

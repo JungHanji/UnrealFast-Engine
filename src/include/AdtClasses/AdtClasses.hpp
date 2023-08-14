@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <vector>
+#include <fstream>
 
 template<class kc, class vc>
 class dict{
@@ -121,4 +122,68 @@ bool in(vector<kc> v, kc i){
         }
     }
     return false;
+}
+
+template<class vc>
+int index(vector<vc> vecs, vc key){
+    int ind = 0;
+    for(vc vkey : vecs){
+        if(vkey == key) return ind;
+        ind++;
+    }
+
+    return -1;
+}
+
+template<class cs>
+void printv(vector<cs> vs, bool qoutes = false, char end=' '){
+    for(cs s: vs){
+        if(qoutes) cout<<"'"<<s<<"'"<<end;
+        else cout<<s<<end;
+    }
+    cout<<endl;
+}
+
+vector<string> getFileLines(std::string fileName, char sep = '\n'){
+    ifstream ogfile(fileName);
+    string line;
+    vector<string> lines;
+    while (!ogfile.eof()){
+        getline(ogfile,line, sep);
+        lines.push_back(line);
+    }
+
+    return {lines};
+}
+
+vector<string> split(string line, char delim = ' '){
+    vector<string> elems{""};
+    bool isSpace = true;
+    for(char ch : line){
+        if(isSpace && ch!=delim || !isSpace && ch!=delim){
+            elems[elems.size()-1]+=ch;
+        }
+        isSpace = ch == delim;
+        if (isSpace) elems.push_back("");
+    }
+
+    return {elems};
+
+}
+
+string join(vector<string> vs, char udel = ' '){
+    string o;
+    for(string s : vs){
+        o+=s;
+        o+=udel;
+    }
+
+    return {o};
+}
+
+bool isInteger(const std::string & s){
+   if(s.empty() || ((!isdigit(s[0])) && (s[0] != '-') && (s[0] != '+'))) return false;
+   char * p;
+   strtol(s.c_str(), &p, 10);
+   return (*p == 0);
 }

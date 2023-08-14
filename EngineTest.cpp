@@ -16,13 +16,6 @@ void updateColor(Slider* slider, vec2 &val){
     if(slider->name == "b") b = slider->getRightValue();
 }
 
-float vert[] = {
-        1, 0, 1,  
-        1, 0, -1,  
-        -1, 0, -1,  
-        -1, 0, 1
-    };
-
 void draw(OpenGLWindow *window){
     glEnableClientState(GL_VERTEX_ARRAY);
         glVertexPointer(3, GL_FLOAT, 0, &vert);

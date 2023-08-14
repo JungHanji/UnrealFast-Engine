@@ -1,10 +1,4 @@
-#include <SFML/Graphics.hpp>
-
-#include <MathLib/VectorFuncs.hpp>
-#include <glad/glad.h>
-#include <GLUT/glut.h>
 #include "Engine.hpp"
-
 #include <functional>
 
 using namespace std;
