@@ -18,7 +18,6 @@ void updateColor(Slider* slider, vec2 &val){
 
 void update(GUIApp *app){
     proc.update(app->mData);
-    cout<<proc.getObject("cube").pos.x<<" "<<proc.getObject("cube").pos.y<<" "<<proc.getObject("cube").pos.z<<endl;
 }
 
 int main(){
@@ -31,8 +30,9 @@ int main(){
     app.setUpdateFunction(update);
 
     proc = Processor({400, 300}, {800, 500}, {100, 200, 255}, &window);
+    proc.camera.setButtonArea({400, 50}, {800, 500});
 
-    Object plane = Plane({-50, 0, -50}, {100, 100}, {0, 255, 0}), cube = Cube({0, 10, 0}, {255, 0, 0}, 5);
+    Object plane = Plane({-50, 0, -50}, {100, 100}, {0, 255, 0}), cube = Cube({0, 10, 0}, {255, 0, 0}, 50);
     proc.newObject("plane", &plane, true, true, false);
     proc.newObject("cube", &cube);
 

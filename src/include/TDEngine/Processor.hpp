@@ -77,7 +77,6 @@ class Processor{
     
         for(auto obj : objects){
             obj.value.draw();
-            cout<<obj.key<<endl;
         }
 
         //glPushMatrix();

@@ -34,7 +34,7 @@ Object Plane(vec3 pos, vec2 size, vec3 color = (255, 255, 255), bool triangulize
     return {ob};
 }
 
-mesh planeMesh(vec3 pos = vec3(), vec2 size = vec2(1, 1)){
+mesh planeMesh(vec3 pos, vec2 size = vec2(1, 1)){
     mesh om;
     om.tris.push_back(triangle(pos+vec3(-1*size.x, 0, -1*size.y), pos+vec3(-1*size.x, 0, 1*size.y), pos+vec3(1*size.x, 0, 1*size.y)));
         om.tris.push_back(triangle(pos+vec3(-1*size.x, 0, -1*size.y), pos+vec3(1*size.x, 0, 1*size.y), pos+vec3(1*size.x, 0, -1*size.y)));
@@ -91,7 +91,7 @@ Object Terrain(vec3 pos, vec2 size = {1000, 1000}, vec3 color = {0, 255, 0}){
 
     for(int y=0;y<size.y;y++){
         for(int x=0;x<size.x;x++){
-            meshesVect.push_back(planeMesh({(float)x, 0, (float)y}));
+            meshesVect.push_back(planeMesh({x, 0, y}));
         }
     }
     
